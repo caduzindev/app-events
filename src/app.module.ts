@@ -5,6 +5,9 @@ import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from './customer/entities/customer';
 import { AuthModule } from './auth/auth.module';
+import { InstitutionController } from './institution/institution.controller';
+import { InstitutionService } from './institution/institution.service';
+import { InstitutionModule } from './institution/institution.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -19,8 +22,9 @@ import { AuthModule } from './auth/auth.module';
     }),
     CustomerModule,
     AuthModule,
+    InstitutionModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, InstitutionController],
+  providers: [AppService, InstitutionService],
 })
 export class AppModule {}
