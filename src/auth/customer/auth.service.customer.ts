@@ -23,12 +23,7 @@ export class AuthServiceCustomer implements AuthService {
 
   async login(payload: any) {
     return {
-      access_token: this.jwtService.sign({
-        id: payload.id,
-        name: payload.name,
-        email: payload.email,
-        cpf: payload.cpf,
-      }),
+      access_token: this.jwtService.sign({ id: payload.id }),
     };
   }
 }
