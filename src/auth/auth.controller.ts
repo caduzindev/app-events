@@ -8,6 +8,6 @@ export class AuthController {
   @UseGuards(LocalCustomerGuard)
   @Post('login/customer')
   async loginCustomer(@Request() req) {
-    return this.authServiceCustomer.login(req);
+    return this.authServiceCustomer.login(req.user);
   }
 }
