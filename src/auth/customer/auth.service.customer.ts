@@ -2,10 +2,14 @@ import { CustomerService } from 'src/customer/customer.service';
 import { AuthService } from '../auth.service.interface';
 import { compare } from 'bcrypt';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthServiceCustomer implements AuthService {
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private jwtService: JwtService,
+  ) {}
 
   async validate(email: string, password: string): Promise<any> {
     const customer = await this.customerService.findOneByEmail(email);
@@ -15,5 +19,16 @@ export class AuthServiceCustomer implements AuthService {
     if (!isValidPass) return null;
 
     return this.customerService.buildCustomer(customer);
+  }
+
+  async login(payload: any) {
+    return {
+      access_token: this.jwtService.sign({
+        id: payload.id,
+        name: payload.name,
+        email: payload.email,
+        cpf: payload.cpf,
+      }),
+    };
   }
 }
