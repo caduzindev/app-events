@@ -12,5 +12,8 @@ export class Customer {
   email: string;
 
   @Column()
+  password: string;
+
+  @Column()
   cpf: string;
 }

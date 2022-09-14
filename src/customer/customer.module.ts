@@ -4,6 +4,7 @@ import { CustomerRepository } from './customer.repository';
 import { CustomerService } from './customer.service';
 
 @Module({
+  exports: [CustomerService],
   controllers: [CustomerController],
   providers: [CustomerService, CustomerRepository],
 })

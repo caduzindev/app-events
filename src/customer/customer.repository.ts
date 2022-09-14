@@ -8,4 +8,7 @@ export class CustomerRepository {
   async create(customer: Partial<Customer>): Promise<Customer> {
     return await this.dataSource.getRepository(Customer).save(customer);
   }
+  async findOneByEmail(email: string): Promise<Customer> {
+    return await this.dataSource.getRepository(Customer).findOneBy({ email });
+  }
 }
