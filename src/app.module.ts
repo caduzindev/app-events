@@ -5,9 +5,9 @@ import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from './customer/entities/customer';
 import { AuthModule } from './auth/auth.module';
-import { InstitutionController } from './institution/institution.controller';
-import { InstitutionService } from './institution/institution.service';
 import { InstitutionModule } from './institution/institution.module';
+import { Institution } from './institution/entities/institution';
+import { PaymentModule } from './payment/payment.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,14 +17,15 @@ import { InstitutionModule } from './institution/institution.module';
       username: 'postgres',
       password: 'root',
       database: 'eventapp',
-      entities: [Customer],
+      entities: [Customer, Institution],
       synchronize: true,
     }),
     CustomerModule,
     AuthModule,
     InstitutionModule,
+    PaymentModule,
   ],
-  controllers: [AppController, InstitutionController],
-  providers: [AppService, InstitutionService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
