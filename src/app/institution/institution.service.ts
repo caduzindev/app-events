@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
-import { PaymentService } from 'src/payment/payment.service';
+import { PaymentService } from '../payment/payment.service';
 import { Institution } from './entities/institution';
 import { InstitutionRepository } from './institution.repository';
 

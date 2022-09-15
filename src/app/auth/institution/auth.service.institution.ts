@@ -2,7 +2,7 @@ import { AuthService } from '../auth.service.interface';
 import { compare } from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { InstitutionService } from 'src/institution/institution.service';
+import { InstitutionService } from '../../institution/institution.service';
 
 @Injectable()
 export class AuthServiceInstitution implements AuthService {

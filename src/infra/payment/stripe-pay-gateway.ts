@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PayGateway } from 'src/payment/protocols/pay.gateway';
+import { PayGateway } from 'src/app/payment/protocols/pay.gateway';
 import Stripe from 'stripe';
 
 @Injectable()

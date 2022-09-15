@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CustomerModule } from './customer/customer.module';
+import { CustomerModule } from './app/customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './customer/entities/customer';
-import { AuthModule } from './auth/auth.module';
-import { InstitutionModule } from './institution/institution.module';
-import { Institution } from './institution/entities/institution';
-import { PaymentModule } from './payment/payment.module';
+import { Customer } from './app/customer/entities/customer';
+import { AuthModule } from './app/auth/auth.module';
+import { InstitutionModule } from './app/institution/institution.module';
+import { Institution } from './app/institution/entities/institution';
+import { PaymentModule } from './app/payment/payment.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({

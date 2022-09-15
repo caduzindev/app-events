@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CustomerModule } from 'src/customer/customer.module';
+import { CustomerModule } from 'src/app/customer/customer.module';
 import { AuthServiceCustomer } from './customer/auth.service.customer';
 import { LocalCustomerStrategy } from './customer/strategy/Local.customer.strategy';
 import { AuthController } from './auth.controller';
@@ -10,7 +10,7 @@ import { JwtCustomerStrategy } from './customer/strategy/jwt.customer.strategy';
 import { LocalInstitutionStrategy } from './institution/strategy/local.institution.strategy';
 import { JwtInstitutionStrategy } from './institution/strategy/jwt.institution.strategy';
 import { AuthServiceInstitution } from './institution/auth.service.institution';
-import { InstitutionModule } from 'src/institution/institution.module';
+import { InstitutionModule } from 'src/app/institution/institution.module';
 
 @Module({
   imports: [

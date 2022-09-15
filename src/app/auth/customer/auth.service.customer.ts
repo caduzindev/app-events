@@ -1,4 +1,4 @@
-import { CustomerService } from 'src/customer/customer.service';
+import { CustomerService } from 'src/app/customer/customer.service';
 import { AuthService } from '../auth.service.interface';
 import { compare } from 'bcrypt';
 import { Injectable } from '@nestjs/common';
