@@ -11,4 +11,8 @@ export class CustomerRepository {
   async findOneByEmail(email: string): Promise<Customer> {
     return await this.dataSource.getRepository(Customer).findOneBy({ email });
   }
+
+  async findOneByCpf(cpf: string): Promise<Customer> {
+    return await this.dataSource.getRepository(Customer).findOneBy({ cpf });
+  }
 }

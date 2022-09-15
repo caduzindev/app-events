@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { PaymentService } from 'src/payment/payment.service';
 import { Institution } from './entities/institution';
@@ -13,6 +13,13 @@ export class InstitutionService {
   async createInstitution(
     institution: Partial<Institution>,
   ): Promise<Partial<Institution>> {
+    if (await this.findOneByEmail(institution.email)) {
+      throw new BadRequestException(`O email ${institution.email} já existe`);
+    }
+
+    if (await this.findOneByCnpj(institution.cnpj)) {
+      throw new BadRequestException(`O cnpj ${institution.cnpj} já existe`);
+    }
     const pay_id = await this.paymentService.createAccountSeller(
       institution.email,
     );
@@ -26,6 +33,10 @@ export class InstitutionService {
 
   async findOneByEmail(email: string): Promise<Institution> {
     return await this.institutionRepository.findOneByEmail(email);
+  }
+
+  async findOneByCnpj(cnpj: string): Promise<Institution> {
+    return await this.institutionRepository.findOneByCnpj(cnpj);
   }
 
   buildInstitution(institution: Institution): Partial<Institution> {

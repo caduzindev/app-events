@@ -15,4 +15,8 @@ export class InstitutionRepository {
       .getRepository(Institution)
       .findOneBy({ email });
   }
+
+  async findOneByCnpj(cnpj: string): Promise<Institution> {
+    return await this.dataSource.getRepository(Institution).findOneBy({ cnpj });
+  }
 }
