@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Event } from 'src/app/event/entities/event';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('institution')
 export class Institution {
@@ -19,4 +20,7 @@ export class Institution {
 
   @Column()
   pay_id: string;
+
+  @OneToMany(() => Event, (event) => event.institution)
+  events: Event[];
 }

@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { StripePayGateway } from 'src/infra/payment/stripe-pay-gateway';
-import { PaymentService } from './../payment/payment.service';
+import { PaymentService } from 'src/app/payment/payment.service';
+import { Institution } from './entities/institution';
 import { InstitutionController } from './institution.controller';
 import { InstitutionRepository } from './institution.repository';
 import { InstitutionService } from './institution.service';
@@ -14,6 +16,6 @@ import { InstitutionService } from './institution.service';
     PaymentService,
     StripePayGateway,
   ],
-  imports: [],
+  imports: [TypeOrmModule.forFeature([Institution])],
 })
 export class InstitutionModule {}

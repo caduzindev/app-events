@@ -3,10 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomerModule } from './app/customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './app/customer/entities/customer';
 import { AuthModule } from './app/auth/auth.module';
 import { InstitutionModule } from './app/institution/institution.module';
-import { Institution } from './app/institution/entities/institution';
 import { PaymentModule } from './app/payment/payment.module';
 import { EventModule } from './app/event/event.module';
 @Module({
@@ -18,7 +16,7 @@ import { EventModule } from './app/event/event.module';
       username: 'postgres',
       password: 'root',
       database: 'eventapp',
-      entities: [Customer, Institution],
+      autoLoadEntities: true,
       synchronize: true,
     }),
     CustomerModule,
