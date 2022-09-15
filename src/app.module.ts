@@ -8,6 +8,7 @@ import { AuthModule } from './app/auth/auth.module';
 import { InstitutionModule } from './app/institution/institution.module';
 import { Institution } from './app/institution/entities/institution';
 import { PaymentModule } from './app/payment/payment.module';
+import { EventModule } from './app/event/event.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -24,6 +25,7 @@ import { PaymentModule } from './app/payment/payment.module';
     AuthModule,
     InstitutionModule,
     PaymentModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],
