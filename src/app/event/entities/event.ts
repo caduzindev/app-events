@@ -1,9 +1,11 @@
 import { Institution } from 'src/app/institution/entities/institution';
+import { Ticket } from 'src/app/ticket/entities/ticket';
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -36,4 +38,7 @@ export class Event {
 
   @Column({ type: 'decimal' })
   input_value: number;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.event)
+  tickets: Ticket[];
 }
