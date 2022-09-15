@@ -12,6 +12,9 @@ export class Event {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  name: string;
+
   @ManyToOne(() => Institution, (institution) => institution.events)
   @JoinColumn({ name: 'institution_id' })
   institution: Institution;

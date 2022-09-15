@@ -19,7 +19,7 @@ import { InstitutionModule } from 'src/app/institution/institution.module';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '3600s' },
     }),
   ],
   providers: [
