@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { hash } from 'bcrypt';
 import { PaymentService } from 'src/payment/payment.service';
 import { Institution } from './entities/institution';
 import { InstitutionRepository } from './institution.repository';
@@ -18,8 +19,13 @@ export class InstitutionService {
 
     institution.pay_id = pay_id;
 
+    institution.password = await hash(institution.password, 10);
     const newInstitution = await this.institutionRepository.create(institution);
     return this.buildInstitution(newInstitution);
+  }
+
+  async findOneByEmail(email: string): Promise<Institution> {
+    return await this.institutionRepository.findOneByEmail(email);
   }
 
   buildInstitution(institution: Institution): Partial<Institution> {

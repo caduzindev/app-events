@@ -6,6 +6,7 @@ import { InstitutionRepository } from './institution.repository';
 import { InstitutionService } from './institution.service';
 
 @Module({
+  exports: [InstitutionService],
   controllers: [InstitutionController],
   providers: [
     InstitutionService,

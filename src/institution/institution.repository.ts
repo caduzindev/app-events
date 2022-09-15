@@ -9,4 +9,10 @@ export class InstitutionRepository {
   async create(institution: Partial<Institution>): Promise<Institution> {
     return await this.dataSource.getRepository(Institution).save(institution);
   }
+
+  async findOneByEmail(email: string): Promise<Institution> {
+    return await this.dataSource
+      .getRepository(Institution)
+      .findOneBy({ email });
+  }
 }
