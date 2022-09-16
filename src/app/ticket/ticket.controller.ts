@@ -19,4 +19,13 @@ export class TicketController {
     const customer_id = req.user.id;
     return await this.ticketService.getAllTicketsCustomer(customer_id);
   }
+
+  @UseGuards(JwtCustomerGuard)
+  @Get('customer/:ticket')
+  async getCustomerTicket(@Request() req, @Param() params): Promise<any> {
+    const cutomer_id = req.user.id;
+    const ticket_id = params.ticket;
+
+    return await this.ticketService.getTicketCustomer(ticket_id, cutomer_id);
+  }
 }

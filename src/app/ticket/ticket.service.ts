@@ -13,4 +13,14 @@ export class TicketService {
   async getAllTicketsCustomer(customer_id: number): Promise<Ticket[]> {
     return await this.ticketRepository.getAllTicketsCustomer(customer_id);
   }
+
+  async getTicketCustomer(
+    ticket_id: number,
+    customer_id: number,
+  ): Promise<Ticket> {
+    return await this.ticketRepository.getTicketCustomer(
+      ticket_id,
+      customer_id,
+    );
+  }
 }

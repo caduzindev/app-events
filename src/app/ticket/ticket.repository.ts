@@ -27,4 +27,16 @@ export class TicketRepository {
       },
     });
   }
+
+  async getTicketCustomer(
+    ticket_id: number,
+    customer_id: number,
+  ): Promise<Ticket> {
+    return await this.dataSource.getRepository(Ticket).findOne({
+      where: {
+        id: ticket_id,
+        customer: { id: customer_id },
+      },
+    });
+  }
 }
