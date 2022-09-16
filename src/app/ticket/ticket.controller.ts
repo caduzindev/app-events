@@ -1,4 +1,5 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Request, UseGuards } from '@nestjs/common';
+import { JwtCustomerGuard } from '../auth/customer/guards/jwt.customer.guard';
 import { JwtInstitutionGuard } from '../auth/institution/guards/jwt.institution.guard';
 import { TicketService } from './ticket.service';
 
@@ -10,5 +11,12 @@ export class TicketController {
   async validTicket(@Param() params): Promise<any> {
     const code = params.code;
     return await this.ticketService.checkCpfMatchesTicket(code);
+  }
+
+  @UseGuards(JwtCustomerGuard)
+  @Get('customer')
+  async getCustomerTickets(@Request() req): Promise<any> {
+    const customer_id = req.user.id;
+    return await this.ticketService.getAllTicketsCustomer(customer_id);
   }
 }

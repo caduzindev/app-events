@@ -4,7 +4,10 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { jwtConstants } from 'src/app/auth/auth.constants';
 
 @Injectable()
-export class JwtInstitutionStrategy extends PassportStrategy(Strategy) {
+export class JwtInstitutionStrategy extends PassportStrategy(
+  Strategy,
+  'institution-jwt',
+) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

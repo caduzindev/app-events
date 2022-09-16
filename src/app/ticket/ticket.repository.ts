@@ -19,4 +19,12 @@ export class TicketRepository {
       },
     });
   }
+
+  async getAllTicketsCustomer(customer_id: number): Promise<Ticket[]> {
+    return await this.dataSource.getRepository(Ticket).find({
+      where: {
+        customer: { id: customer_id },
+      },
+    });
+  }
 }

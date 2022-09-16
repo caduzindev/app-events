@@ -4,14 +4,19 @@ import { Strategy } from 'passport-local';
 import { AuthServiceCustomer } from '../auth.service.customer';
 
 @Injectable()
-export class LocalCustomerStrategy extends PassportStrategy(Strategy) {
+export class LocalCustomerStrategy extends PassportStrategy(
+  Strategy,
+  'customer-local',
+) {
   constructor(private authServiceCustomer: AuthServiceCustomer) {
     super({ usernameField: 'email' });
   }
 
   async validate(username: string, password: string): Promise<any> {
-    const customer = this.authServiceCustomer.validate(username, password);
-
+    const customer = await this.authServiceCustomer.validate(
+      username,
+      password,
+    );
     if (!customer) throw new UnauthorizedException();
 
     return customer;

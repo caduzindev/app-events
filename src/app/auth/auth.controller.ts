@@ -13,12 +13,12 @@ export class AuthController {
   @UseGuards(LocalCustomerGuard)
   @Post('login/customer')
   async loginCustomer(@Request() req) {
-    return this.authServiceCustomer.login(req.user);
+    return await this.authServiceCustomer.login(req.user);
   }
 
   @UseGuards(LocalInstitutionGuard)
   @Post('login/institution')
   async loginInstitution(@Request() req) {
-    return this.authServiceInstitution.login(req.user);
+    return await this.authServiceInstitution.login(req.user);
   }
 }
