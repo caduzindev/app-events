@@ -24,4 +24,8 @@ export class EventService {
   async getEvent(event_id: number): Promise<Event> {
     return await this.eventRepository.findOneById(event_id);
   }
+
+  async getAllEventInstitution(institution_id: number): Promise<Event[]> {
+    return await this.eventRepository.getAllByInstitutionId(institution_id);
+  }
 }

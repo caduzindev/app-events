@@ -25,4 +25,12 @@ export class EventRepository {
       .getRepository(Event)
       .findOneBy({ id: event_id });
   }
+
+  async getAllByInstitutionId(institution_id: number): Promise<Event[]> {
+    return await this.dataSource.getRepository(Event).find({
+      where: {
+        institution: { id: institution_id },
+      },
+    });
+  }
 }

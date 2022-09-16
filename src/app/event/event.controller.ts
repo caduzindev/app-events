@@ -33,9 +33,15 @@ export class EventController {
     return await this.eventService.updateEvent(event_id, updateEventDto);
   }
 
-  @Get(':id')
+  @Get('show/:id')
   async getEvent(@Param() params): Promise<any> {
     const event_id = params.id;
     return await this.eventService.getEvent(event_id);
+  }
+
+  @Get('institution')
+  async getAllEvent(@Request() req): Promise<any> {
+    const institution_id = req.user.id;
+    return await this.eventService.getAllEventInstitution(institution_id);
   }
 }
