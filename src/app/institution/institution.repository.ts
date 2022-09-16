@@ -19,4 +19,10 @@ export class InstitutionRepository {
   async findOneByCnpj(cnpj: string): Promise<Institution> {
     return await this.dataSource.getRepository(Institution).findOneBy({ cnpj });
   }
+
+  async findOneById(institution_id: number): Promise<Institution> {
+    return await this.dataSource
+      .getRepository(Institution)
+      .findOneBy({ id: institution_id });
+  }
 }

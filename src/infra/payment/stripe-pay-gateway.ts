@@ -30,4 +30,15 @@ export class StripePayGateway implements PayGateway {
 
     return account.id;
   }
+
+  async activateSellerAccountLink(account_id: string): Promise<string> {
+    const accountLink = await this.getInstance().accountLinks.create({
+      account: account_id,
+      refresh_url: 'https://example.com/reauth',
+      return_url: 'https://example.com/return',
+      type: 'account_onboarding',
+    });
+
+    return accountLink.url;
+  }
 }

@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { hash } from 'bcrypt';
 import { PaymentService } from '../payment/payment.service';
+import { ActivateAccountPayment } from './dto/response/activate.account.payment.dto';
 import { Institution } from './entities/institution';
 import { InstitutionRepository } from './institution.repository';
 
@@ -29,6 +30,20 @@ export class InstitutionService {
     institution.password = await hash(institution.password, 10);
     const newInstitution = await this.institutionRepository.create(institution);
     return this.buildInstitution(newInstitution);
+  }
+
+  async activateAccountPayment(
+    account_id: string,
+  ): Promise<ActivateAccountPayment> {
+    const link = await this.paymentService.activateSellerAccountLink(
+      account_id,
+    );
+
+    return { link };
+  }
+
+  async findOneById(institution_id: number): Promise<Institution> {
+    return await this.institutionRepository.findOneById(institution_id);
   }
 
   async findOneByEmail(email: string): Promise<Institution> {
