@@ -30,6 +30,10 @@ export class CustomerService {
     return await this.customerRepository.findOneByCpf(cpf);
   }
 
+  async findOneById(customer_id: number): Promise<Customer> {
+    return await this.customerRepository.findOneById(customer_id);
+  }
+
   buildCustomer(customer: Customer): Partial<Customer> {
     return {
       id: customer.id,

@@ -33,4 +33,15 @@ export class EventRepository {
       },
     });
   }
+
+  async getEventToInsitution(event_id: number): Promise<Event> {
+    return await this.dataSource.getRepository(Event).findOne({
+      where: {
+        id: event_id,
+      },
+      relations: {
+        institution: true,
+      },
+    });
+  }
 }

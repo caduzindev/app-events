@@ -15,4 +15,10 @@ export class CustomerRepository {
   async findOneByCpf(cpf: string): Promise<Customer> {
     return await this.dataSource.getRepository(Customer).findOneBy({ cpf });
   }
+
+  async findOneById(customer_id: number): Promise<Customer> {
+    return await this.dataSource
+      .getRepository(Customer)
+      .findOneBy({ id: customer_id });
+  }
 }

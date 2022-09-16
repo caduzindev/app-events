@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { StripePayGateway } from '../../infra/payment/stripe-pay-gateway';
+import { Customer, Product } from './protocols/pay.gateway';
 
 @Injectable()
 export class PaymentService {
@@ -11,5 +12,19 @@ export class PaymentService {
 
   async activateSellerAccountLink(account_id: string): Promise<string> {
     return await this.payGateway.activateSellerAccountLink(account_id);
+  }
+
+  async createCheckoutMarketplaceLink(
+    account_id: string,
+    customer: Customer,
+    products: Product[],
+    percent: number,
+  ): Promise<string> {
+    return await this.payGateway.createCheckoutMarketplaceLink(
+      account_id,
+      customer,
+      products,
+      percent,
+    );
   }
 }
