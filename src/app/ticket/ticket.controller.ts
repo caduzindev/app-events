@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -10,6 +11,10 @@ import {
 import { JwtCustomerGuard } from '../auth/customer/guards/jwt.customer.guard';
 import { JwtInstitutionGuard } from '../auth/institution/guards/jwt.institution.guard';
 import { CustomerService } from '../customer/customer.service';
+import {
+  ExceedsTotalVacancies,
+  NoVacancy,
+} from '../event/entities/event.error';
 import { EventService } from '../event/event.service';
 import { PaymentService } from '../payment/payment.service';
 import { BuyTicketDto } from './dto/request/buy.ticket.dto';
@@ -57,6 +62,18 @@ export class TicketController {
     const event_id = params.event;
 
     const infoEvent = await this.eventService.getEventToIntitution(event_id);
+
+    try {
+      this.eventService.validQuantityTicketRequested(
+        buyTicketDto.quantity,
+        infoEvent,
+      );
+    } catch (err) {
+      if (err instanceof NoVacancy) throw new BadRequestException(err.message);
+      if (err instanceof ExceedsTotalVacancies)
+        throw new BadRequestException(err.message);
+    }
+
     const infoCustomer = await this.customerService.findOneById(customer_id);
     const session = await this.paymentService.createCheckoutMarketplaceLink(
       infoEvent.institution.pay_id,
