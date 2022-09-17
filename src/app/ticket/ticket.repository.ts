@@ -39,4 +39,8 @@ export class TicketRepository {
       },
     });
   }
+
+  async create(ticket: Partial<Ticket>): Promise<Ticket> {
+    return await this.dataSource.getRepository(Ticket).save(ticket);
+  }
 }

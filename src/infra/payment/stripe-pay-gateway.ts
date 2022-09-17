@@ -90,4 +90,12 @@ export class StripePayGateway implements PayGateway {
 
     return session.url;
   }
+
+  parseEvent(body: string | Buffer, sig: string, secret: string) {
+    return this.getInstance().webhooks.constructEvent(body, sig, secret);
+  }
+
+  async getCustomerCheckout(customer: string): Promise<any> {
+    return await this.getInstance().customers.retrieve(customer);
+  }
 }

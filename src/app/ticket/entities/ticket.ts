@@ -3,6 +3,7 @@ import { Event } from 'src/app/event/entities/event';
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -14,6 +15,7 @@ export class Ticket {
   id: number;
 
   @Column()
+  @Generated('uuid')
   code: string;
 
   @Column({ type: 'decimal' })

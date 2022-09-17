@@ -27,4 +27,12 @@ export class PaymentService {
       percent,
     );
   }
+
+  parseEvent(body: string | Buffer, sig: string, secret: string): any {
+    return this.payGateway.parseEvent(body, sig, secret);
+  }
+
+  async getCustomerCheckout(customer: string): Promise<any> {
+    return await this.payGateway.getCustomerCheckout(customer);
+  }
 }

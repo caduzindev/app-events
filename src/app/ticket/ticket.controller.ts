@@ -62,7 +62,7 @@ export class TicketController {
       infoEvent.institution.pay_id,
       {
         name: infoCustomer.name,
-        metadata: { event_id, customer_id },
+        metadata: { event_id, customer_id, quantity: buyTicketDto.quantity },
       },
       [
         {

@@ -8,6 +8,8 @@ import { InstitutionModule } from './app/institution/institution.module';
 import { PaymentModule } from './app/payment/payment.module';
 import { EventModule } from './app/event/event.module';
 import { TicketModule } from './app/ticket/ticket.module';
+import { WebhooksModule } from './app/webhooks/webhooks.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,12 +22,14 @@ import { TicketModule } from './app/ticket/ticket.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    EventEmitterModule.forRoot(),
     CustomerModule,
     AuthModule,
     InstitutionModule,
     PaymentModule,
     EventModule,
     TicketModule,
+    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],

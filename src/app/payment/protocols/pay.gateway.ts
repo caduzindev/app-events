@@ -17,4 +17,6 @@ export interface PayGateway {
     products: Product[],
     percent: number,
   ): Promise<string>;
+  parseEvent(body: string | Buffer, sig: string, secret: string): any;
+  getCustomerCheckout(customer: string): Promise<any>;
 }

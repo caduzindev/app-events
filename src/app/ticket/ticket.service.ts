@@ -23,4 +23,22 @@ export class TicketService {
       customer_id,
     );
   }
+
+  async createManyTicket(
+    ticket: Partial<Ticket>,
+    quantity: number,
+  ): Promise<void> {
+    const value_per_ticket = ticket.value / quantity;
+    for (let i = 1; i <= quantity; i++) {
+      await this.createTicket({
+        customer: ticket.customer,
+        event: ticket.event,
+        value: value_per_ticket,
+      });
+    }
+  }
+
+  async createTicket(ticket: Partial<Ticket>): Promise<Ticket> {
+    return await this.ticketRepository.create(ticket);
+  }
 }
