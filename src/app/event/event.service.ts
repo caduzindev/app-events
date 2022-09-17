@@ -34,12 +34,20 @@ export class EventService {
     return await this.eventRepository.getAllByInstitutionId(institution_id);
   }
 
+  async getAllEventsToInstitutions(): Promise<Event[]> {
+    return await this.eventRepository.getAllEventsToInstitutions();
+  }
+
   validQuantityTicketRequested(quantity: number, event: Partial<Event>): void {
     if (event.tot_tickets == 0)
       throw new NoVacancy('Não há mais vagas para este evento');
     if (event.tot_tickets < quantity)
       throw new ExceedsTotalVacancies(
-        `A quantidade pedida excede o total de ${event.tot_tickets} vagdas do evento`,
+        `A quantidade pedida excede o total de ${event.tot_tickets} vagas do evento`,
       );
+  }
+
+  async searchFilter(expression: string): Promise<Event[]> {
+    return await this.eventRepository.filterByExpression(expression);
   }
 }

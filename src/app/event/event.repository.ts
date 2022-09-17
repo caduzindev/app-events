@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { DataSource, ILike } from 'typeorm';
 import { Event } from './entities/event';
 
 @Injectable()
@@ -21,9 +22,22 @@ export class EventRepository {
   }
 
   async findOneById(event_id: number): Promise<Event> {
-    return await this.dataSource
-      .getRepository(Event)
-      .findOneBy({ id: event_id });
+    return await this.dataSource.getRepository(Event).findOne({
+      select: {
+        institution: {
+          id: true,
+          name: true,
+          email: true,
+          cnpj: true,
+        },
+      },
+      relations: {
+        institution: true,
+      },
+      where: {
+        id: event_id,
+      },
+    });
   }
 
   async getAllByInstitutionId(institution_id: number): Promise<Event[]> {
@@ -42,6 +56,31 @@ export class EventRepository {
       relations: {
         institution: true,
       },
+    });
+  }
+
+  async getAllEventsToInstitutions(): Promise<Event[]> {
+    return await this.dataSource.getRepository(Event).find({
+      select: {
+        institution: {
+          id: true,
+          email: true,
+          cnpj: true,
+        },
+      },
+      relations: {
+        institution: true,
+      },
+    });
+  }
+
+  async filterByExpression(expression: string): Promise<Event[]> {
+    return await this.dataSource.getRepository(Event).find({
+      where: [
+        { name: ILike(`%${expression}%`) },
+        { description: ILike(`%${expression}%`) },
+        { location: ILike(`%${expression}%`) },
+      ],
     });
   }
 }
