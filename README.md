@@ -1,6 +1,9 @@
 # Api de gestão de eventos
-Antes de começar você precisa criar um contas no [STRIPE](https://stripe.com/br) e ativar o [STRIPE CONNECT](https://stripe.com/docs/connect) e por ultimo baixe o [STRIPE CLI](https://stripe.com/docs/stripe-cli)
-
+Antes de começar você precisa criar um conta no [STRIPE](https://stripe.com/br) e ativar o [STRIPE CONNECT](https://stripe.com/docs/connect) e por ultimo baixe o [STRIPE CLI](https://stripe.com/docs/stripe-cli)
+## Faça Login
+```bash
+$ stripe login
+```
 ## Registre o evento
 ```bash
 $ stripe trigger payment_intent.succeeded
