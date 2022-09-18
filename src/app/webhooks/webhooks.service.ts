@@ -8,12 +8,12 @@ export class WebhooksService {
   constructor(
     private paymentService: PaymentService,
     private eventEmitter: EventEmitter2,
-  ) {}
+  ) { }
   async emitStipeEvent(body: string | Buffer, sig: string) {
     const stipeEvent = await this.paymentService.parseEvent(
       body,
       sig,
-      'whsec_6c6b298dd5275b226096909a32bb08df9464a63067d91dae35421443a5b97185',
+      process.env.STRIPE_ENDPOINT_SECRET,
     );
     switch (stipeEvent.type) {
       case 'payment_intent.succeeded':

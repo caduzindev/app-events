@@ -27,7 +27,7 @@ export class TicketController {
     private eventService: EventService,
     private paymentService: PaymentService,
     private customerService: CustomerService,
-  ) {}
+  ) { }
   @UseGuards(JwtInstitutionGuard)
   @Get('code/:code')
   async validTicket(@Param() params): Promise<any> {

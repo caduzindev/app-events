@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3333:3000
+    command: npm run start:dev
+    env_file:
+      - .env
+    networks:
+      - appnet
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    networks:
+      - appnet
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5000:5432
+    env_file:
+      - .env
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-cli
+    command: "listen --api-key ${STRIPE_API_KEY} --device-name ${STRIPE_DEVICE_NAME} --forward-to main:3000/webhooks/stripe"
+    env_file:
+      - .env
+    networks:
+      - appnet
+    depends_on:
+      - main
+networks:
+  appnet:
+    driver: bridge
+volumes:
+  pgdata:

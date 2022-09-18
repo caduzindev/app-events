@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CustomerModule } from 'src/app/customer/customer.module';
 import { AuthServiceCustomer } from './customer/auth.service.customer';
-import { LocalCustomerStrategy } from './customer/strategy/Local.customer.strategy';
+import { LocalCustomerStrategy } from './customer/strategy/local.customer.strategy';
 import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
@@ -32,4 +32,4 @@ import { InstitutionModule } from 'src/app/institution/institution.module';
   ],
   controllers: [AuthController],
 })
-export class AuthModule {}
+export class AuthModule { }

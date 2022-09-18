@@ -13,7 +13,7 @@ export class StripePayGateway implements PayGateway {
     if (this.stripeInstance) return this.stripeInstance;
 
     this.stripeInstance = new Stripe(
-      'sk_test_51LhOuWJg677VM0Tjh5IPGFiZBrPH391EiAucNsA72TG2G5p4YrIdHnsdumd7SuGzHp8IVDsmG8Kt9rWe8wyc4Lpv00lEklWO0m',
+      process.env.STRIPE_API_KEY,
       {
         apiVersion: '2022-08-01',
       },

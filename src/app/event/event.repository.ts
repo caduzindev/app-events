@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DataSource, ILike } from 'typeorm';
 import { Event } from './entities/event';
 
 @Injectable()
 export class EventRepository {
-  constructor(private dataSource: DataSource) {}
+  constructor(private dataSource: DataSource) { }
   async create(institution_id: number, event: Partial<Event>): Promise<Event> {
     return await this.dataSource.getRepository(Event).save({
       institution: {
